@@ -28,7 +28,7 @@ let maxLevel = 4;
 let scale = 0.5;
 let spread = 0.5;
 
-let branches = 2;
+let branches = 1;
 let dots = false;
 
 let color = `hsl(0, 100%, 100%)`;
@@ -108,7 +108,7 @@ function redraw() {
 }
 
 
-let branchlevel = 2;
+let branchlevel = 1;
 
 function changeBranch(branch, type) {
 
