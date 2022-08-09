@@ -16,15 +16,20 @@
             padding: 0;
         }
 
+        body {
+            /* overflow: hidden; */
+        }
+
         #mycanvas {
             background-color: black;
         }
 
+
         #randomizebutton {
             position: absolute !important;
-            top: 0 !important;
+            /* top: 0 !important;
             left: 0 !important;
-            font-weight: 400;
+            font-weight: 400; */
 
         }
 
@@ -50,8 +55,24 @@
 
         .SpreadSlider {
             position: absolute;
-            top: 140px;
+            top: 120px;
             left: 0;
+        }
+
+
+        .uppercorner {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100%;
+            display: flex;
+        }
+
+        .uppercorner > input[type="checkbox"] {
+            position: absolute;
+            left: 120px;
+            top: 10px;
+
         }
     </style>
 </head>
@@ -61,13 +82,16 @@
 
     <canvas id="mycanvas"></canvas>
 
-    <button onclick="save();" id="randomizebutton" class="btn btn-primary">Save Button</button>
+    <div class="uppercorner">
+        <button onclick="save();" id="randomizebutton" class="btn btn-primary">Save Button</button>
+        <input oninput="changeDots();" type="checkbox">
+    </div>
 
     <!-- <input oninput="changeBranch(this);" class="branchSlider" type="range" min="0" max="6"> -->
 
     <div class="branchSlider">
         <button onclick="changeBranch(this, 'increase')" class="btn btn-danger">+</button>
-        <p style="color: white; padding-inline: 10px;">Branching Level: 2 </p>
+        <p id="branchinglevel" style="color: white; padding-inline: 10px;">Branching Level: 2 </p>
 
         <button onclick="changeBranch(this, 'decrease')" class="btn btn-danger">-</button>
 
@@ -76,7 +100,6 @@
     <input oninput="changeSides(this);" class="SidesSlider" type="range" min="0" max="30">
     <input oninput="changeColor(this);" class="ColorSlider" type="range" min="0" max="360">
     <input oninput="spreadSlider(this);" class="SpreadSlider" type="range" min="0" max="8">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>

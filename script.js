@@ -4,7 +4,7 @@ canvas.width = this.window.innerWidth * 0.99999999999999999999999999999999999999
 canvas.height = window.innerHeight * 0.994;
 
 
-ctx.fillRect(0,0,canvas.width, canvas.height);
+ctx.fillRect(0, 0, canvas.width, canvas.height);
 ctx.lineWidth = 20;
 ctx.lineCap = "round";
 ctx.shadowColor = "rgba(0,0,0,0.7)";
@@ -14,7 +14,7 @@ ctx.shadowBlur = 10;
 
 console.log(canvas.width);
 let size;
-if ( canvas.width > 600) {
+if (canvas.width > 600) {
     size = canvas.width / 8;
 
 } else {
@@ -29,7 +29,7 @@ let scale = 0.5;
 let spread = 0.5;
 
 let branches = 2;
-
+let dots = false;
 
 let color = `hsl(0, 100%, 100%)`;
 
@@ -58,6 +58,17 @@ function drawBranch(level) {
         ctx.scale(scale, scale);
         drawBranch(level + 1);
         ctx.restore();
+
+        // lightness = '60%';
+        // let color = 'hsl('+hue+', 100%, '+lightness+')';
+        if (dots) {
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(size * 1.5, size * -0.5, size * 0.07, 0, Math.PI * 2);
+            ctx.fill();
+
+        }
+
     }
 }
 
@@ -67,7 +78,6 @@ function drawBranch(level) {
 
 
 function drawFractal() {
-
     ctx.save();
 
     ctx.translate(canvas.width / 2, canvas.height / 2);
@@ -85,6 +95,7 @@ function drawFractal() {
     }
     ctx.restore();
 
+
 }
 
 drawFractal();
@@ -93,6 +104,7 @@ function redraw() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     drawFractal();
+
 }
 
 
@@ -102,10 +114,14 @@ function changeBranch(branch, type) {
 
     if (type == "increase") {
         branchlevel++;
-    } else if(type == "decrease") {
+    } else if (type == "decrease") {
         branchlevel--;
     }
+    if (branchlevel < 0) {
+        branchlevel = 0;
+    }
     branches = branchlevel;
+    document.getElementById("branchinglevel").innerHTML = "Branching Level: " + branches;
     redraw();
 
 }
@@ -144,3 +160,9 @@ function save() {
 
 
 
+function changeDots() {
+    console.log("hells")
+    dots = dots ? false : true;
+
+    redraw();
+}
